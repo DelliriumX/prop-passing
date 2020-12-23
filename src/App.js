@@ -1,25 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import Blog from './components/Blog'
+import './App.css'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    users: [],
+    searchString: ""
+  }
+
+  setUsers = (data) => {
+    this.setState({
+      users: data
+    })
+  }
+
+  setSearch = (str) => {
+    this.setState({
+      searchString: str
+    })
+  }
+
+  render() {
+    console.log(this.state.users)
+    const usersMatchingSearch =
+      this.state.users.filter(user => {
+        if (user.name.first.includes(this.state.searchString))
+          return true
+        if (user.name.last.includes(this.state.searchString))
+          return true
+
+        return false
+      })
+
+
+    return (
+      <div id="app">
+        <div>Ovo je app</div>
+        <Blog
+          searchString={this.state.searchString}
+          setSearch={this.setSearch}
+          users={usersMatchingSearch}
+          setUsers={this.setUsers} />
+      </div>
+    );
+  }
 }
 
 export default App;

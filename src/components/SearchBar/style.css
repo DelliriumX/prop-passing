@@ -1,0 +1,9 @@
+#search {
+    background-color: lightgreen;
+    padding: 20px;
+    color: black
+}
+
+#search > span {
+    margin: 0 10px;
+}
